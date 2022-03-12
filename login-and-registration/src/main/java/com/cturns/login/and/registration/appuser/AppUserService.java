@@ -21,15 +21,20 @@ private  final  static  String USER_NOT_FOUND_MESSAGE ="user with email %s not f
                                 String.format(USER_NOT_FOUND_MESSAGE,email)) );
     }
     public  String signUpUser(AppUser appUser){
-      boolean userExists =appUserRepository
-              .findByEmail(appUser.getEmail())
-              .isPresent();
-      if (userExists){
-          throw  new IllegalStateException("email already taken");
-      }
+
+        // Checking if a user Exists
+      //boolean userExists =appUserRepository
+            //  .findByEmail(appUser.getEmail())
+          //    .isPresent();
+    // if (userExists){
+          //throw  new IllegalStateException("email already taken");
+   //  }
+
+        //Encoding the Password
      String encodedPassword = bCryptPasswordEncoder
              .encode(appUser.getPassword());
       appUser.setPassword(encodedPassword);
+
       appUserRepository.save(appUser);
 
         return "it works";
