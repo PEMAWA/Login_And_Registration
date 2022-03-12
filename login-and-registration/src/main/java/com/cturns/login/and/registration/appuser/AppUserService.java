@@ -27,7 +27,11 @@ private  final  static  String USER_NOT_FOUND_MESSAGE ="user with email %s not f
       if (userExists){
           throw  new IllegalStateException("email already taken");
       }
-      bCryptPasswordEncoder.encode(appUser.getPassword());
-        return "";
+     String encodedPassword = bCryptPasswordEncoder
+             .encode(appUser.getPassword());
+      appUser.setPassword(encodedPassword);
+      appUserRepository.save(appUser);
+
+        return "it works";
     }
 }
